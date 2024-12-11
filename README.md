@@ -1,2 +1,2 @@
 # Programcacion-III
-Repositorio de proyectos, desde programacion II, hasta proyectos personales, cada proyecto se hizo de manera sistematica, desde codigo basura, que funciona, hasta codigo menos basura que funciona
+Repositorio de proyectos, desde programacion I hasta programacion III, cada proyecto se hizo de manera sistematica, desde codigo basura, que funciona, hasta codigo menos basura que funciona
