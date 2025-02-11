@@ -1,0 +1,585 @@
+Pregunta 1.
+Que es clase y objeto en programación orientada a objetos? De un ejemplo de su uso y el código correspondiente en Java
+- Una clase es un molde o planilla donde se permite crear un objeto, un objeto en programacion es una representacion del mundo real o concepto con atributos y metodos.
+Codigo Java: 
+public class Auto{
+private String color;
+private int placa;
+private Boolean isNuevo;
+public Auto(String color, int placa, Boolean isNuevo ){
+	this.color = color;
+	this.placa = placa;
+	this.isNuevo = isNuevo;
+	}
+	public String estadoAuto(){
+	if(isNuevo ==false){
+	return "Usado";	
+	}else{
+	return "Nuevo";
+		}
+	}
+} 
+
+Pregunta 2.
+Explique el concepto de recurrencia en programación. De dos ejemplos de su uso que hemos visto en el curso y como seria el código en Java
+- La recurrencia consiste en reutilizar, la clase o metodo para realizar algun objetivo en especifico. Ejemplo 
+ 1.- Fibonacci 
+ 2.- Factoriales 
+Codigo Java: 
+public int fibonacci(int numero){
+if(numero <=1){return numero;}
+return fibonacci(numero-1) + Fibonacci(numero-2)
+}
+public int factoriales(int numero){
+if(numero <=1){return numero;}
+return factoriales(numero) * factoriales(numero-1)
+}
+
+Pregunta 3
+La serie de Fibonacci comienza con 0 y 1. Y sigue de la siguiente manera: 
+0 1 1 2 3 5 8 13 ...
+Explique cómo haría un método que devuelva los primeros n números de la serie. El método o alguno de los submétodos debe ser recursivo. Proponer el código en Java.
+- Realizaria una funcion que de manera recursiva, sume el numero que se le pase por parametron con el numero de la posicion previa, y eso lo haga de manera recursiva. 
+Codigo Java: 
+public int fibonacci(int numero){
+if(numero <=1){return numero;}
+return fibonacci(numero-1) + Fibonacci(numero-2)
+}
+
+Pregunta 4
+Explique cuál es la complejidad de un algoritmo de ordenamiento de burbuja. Coloque el código y explique cómo llega a su conclusión y cuál es la fórmula de complejidad que encuentra. O(n)
+- Si esta ordenado(el mejor de los casos) la complejidad seria O(n) = n, en el peor de los casos seria O(n) = n^2. Depende mucho el elemento que sigue, porque si el arreglo esta totalmente desordenado, realiza el bucle hasta que ya no exista intercambio, comparando con dos bucles, uno normal, el otro la posicion que esta a su lado (adyacente).
+Codigo java: 
+ int n = arreglo.length;
+    boolean huboIntercambio;
+	for (int i = 0; i < n - 1; i++) { // Paso 1: Repetir n-1 pasadas
+            huboIntercambio = false; // Inicializar bandera para optimización
+        	for (int j = 0; j < n - i - 1; j++) { // Paso 2: Comparar elementos
+            		if (arreglo[j] > arreglo[j + 1]) { // Paso 3: Verificar si están en el orden incorrecto
+                // Paso 4: Intercambiar elementos
+                int temp = arreglo[j];
+                arreglo[j] = arreglo[j + 1];
+                arreglo[j + 1] = temp;
+                huboIntercambio = true; // Paso 5: Registrar que hubo un intercambio
+            }
+        }
+        // Paso 6: Si no hubo intercambios, el arreglo ya está ordenado
+        if (!huboIntercambio) {
+            break;
+        }
+    }.
+
+Ejemplo de uso:
+Arreglo Inicial: [5, 2, 4, 1]
+Primera Pasada:
+
+Compara 5 y 2 → Intercambia → [2, 5, 4, 1]
+Compara 5 y 4 → Intercambia → [2, 4, 5, 1]
+Compara 5 y 1 → Intercambia → [2, 4, 1, 5]
+Segunda Pasada:
+
+Compara 2 y 4 → No intercambia.
+Compara 4 y 1 → Intercambia → [2, 1, 4, 5]
+Tercera Pasada:
+
+Compara 2 y 1 → Intercambia → [1, 2, 4, 5]
+Arreglo Ordenado: [1, 2, 4, 5]
+
+Pregunta 5
+En Java podemos crear programas que soporten multiprocesos. Con este concepto crear un programa que simula una carrera de caballos. Cada caballo tiene un nombre. El programa indica el orden en el cual llegaron los caballos (que pueden ser 4 o 5 por ejemplo).
+- public class CarreraCaballos {
+
+    public static void main(String[] args) {
+        // Lista para almacenar los resultados
+        List<String> resultados = Collections.synchronizedList(new ArrayList<>());
+
+        // Crear caballos
+        Caballo caballo1 = new Caballo("Caballo 1", resultados);
+        Caballo caballo2 = new Caballo("Caballo 2", resultados);
+        Caballo caballo3 = new Caballo("Caballo 3", resultados);
+        Caballo caballo4 = new Caballo("Caballo 4", resultados);
+
+        // Crear hilos para los caballos
+        Thread hilo1 = new Thread(caballo1);
+        Thread hilo2 = new Thread(caballo2);
+        Thread hilo3 = new Thread(caballo3);
+        Thread hilo4 = new Thread(caballo4);
+
+        // Iniciar la carrera
+        System.out.println("¡La carrera comienza!");
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+        hilo4.start();
+
+        // Esperar a que todos los caballos terminen
+        try {
+            hilo1.join();
+            hilo2.join();
+            hilo3.join();
+            hilo4.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Mostrar resultados
+        System.out.println("\n¡La carrera ha terminado!");
+        System.out.println("Orden de llegada:");
+        for (int i = 0; i < resultados.size(); i++) {
+            System.out.println((i + 1) + ". " + resultados.get(i));
+        }
+    }
+}
+
+class Caballo implements Runnable {
+    private String nombre;
+    private List<String> resultados;
+    private static final int DISTANCIA_TOTAL = 100;
+
+    public Caballo(String nombre, List<String> resultados) {
+        this.nombre = nombre;
+        this.resultados = resultados;
+    }
+
+    @Override
+    public void run() {
+        Random random = new Random();
+        int distanciaRecorrida = 0;
+
+        while (distanciaRecorrida < DISTANCIA_TOTAL) {
+            try {
+                // Avanza una distancia aleatoria entre 1 y 10
+                int avance = random.nextInt(10) + 1;
+                distanciaRecorrida += avance;
+                System.out.println(nombre + " ha avanzado " + avance + " metros. Total: " + distanciaRecorrida + "/" + DISTANCIA_TOTAL);
+
+                // Pausa para simular el tiempo que tarda
+                Thread.sleep(random.nextInt(300) + 200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Añadir el caballo a los resultados
+        synchronized (resultados) {
+            resultados.add(nombre);
+        }
+
+        System.out.println(nombre + " ha terminado la carrera!");
+    }
+}
+
+Pregunta 6
+Hanoi y monjes raros.
+Movimientos necesarios: 1.6⋅10^19.
+Tiempo en años: 507,000507,000507,000 millones de años.
+Tiempo restante del universo: 493,000493,000493,000 millones de años.
+Respuesta Final
+El universo tiene aproximadamente 493,000 millones de años restantes antes de que los monjes terminen el juego de Hanoi.
+
+
+Pregunta 7
+Patron Observer.
+- El patrón Observer (Observador) define una relación uno a muchos, donde un sujeto (Subject) notifica automáticamente a todos sus observadores (Observers) cada vez que ocurre un cambio en su estado.
+
+interface Observer {
+    void update(String message);
+}
+2. Clase Sujeto (Subject):
+
+class Subject {
+    private List<Observer> observers = new ArrayList<>();
+
+    void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    void notifyObservers(String message) {
+        for (Observer o : observers) {
+            o.update(message);
+        }
+    }
+}
+3. Clase Observador Concreto:
+class ConcreteObserver implements Observer {
+    private String name;
+
+    ConcreteObserver(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println(name + " recibió: " + message);
+    }
+}
+Pregunta 8
+Implementar observer programa lista de alumnos.
+Mantiene una lista de alumnos y una lista de observadores registrados.
+Cuando se agrega, elimina o modifica un alumno, se llama a un método notifyObservers(), que avisa a todos los observadores registrados.
+Crear la Interfaz Observer:
+
+Define un método update() que los observadores deben implementar para recibir notificaciones.
+Crear la Clase TablaAlumnos (Observador):
+
+Implementa la interfaz Observer.
+En su método update(), recarga la tabla mostrando los datos actuales de la lista de alumnos.
+Registrar la Tabla como Observador:
+
+Se registra la tabla (TablaAlumnos) como observador de la lista (ListaAlumnos).
+Realizar Operaciones ABM:
+
+Cuando se agregan, eliminan o modifican alumnos, ListaAlumnos llama a notifyObservers(), lo que activa el método update() en TablaAlumnos, actualizando automáticamente la tabla.
+
+
+
+Pregunta 9
+Multiplicacion de matrices.
+- Codigo Java:
+public static int[][] multiplicarMatrices(int[][] m1, int[][] m2) {
+        // Verificar que las dimensiones sean compatibles
+        int filasM1 = m1.length;
+        int columnasM1 = m1[0].length;
+        int filasM2 = m2.length;
+        int columnasM2 = m2[0].length;
+
+        if (columnasM1 != filasM2) {
+            // No se pueden multiplicar
+            return null;
+        }
+
+        // Crear la matriz resultado
+        int[][] resultado = new int[filasM1][columnasM2];
+
+        // Realizar la multiplicación
+        for (int i = 0; i < filasM1; i++) {
+            for (int j = 0; j < columnasM2; j++) {
+                resultado[i][j] = 0; // Inicializar cada celda
+                for (int k = 0; k < columnasM1; k++) {
+                    resultado[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+
+        return resultado;
+    }
+
+
+Pregunta 10
+
+-
+
+
+
+
+
+Pregunta 11
+- Como se construye una Lista.
+Nodo: Representa un elemento de la lista, con dos partes:
+Dato: Contiene el valor almacenado.
+Siguiente: Apunta al siguiente nodo en la lista.
+Lista Enlazada:
+Tiene una referencia al primer nodo llamado cabeza (head).
+Provee métodos para agregar, eliminar y recorrer la lista.
+
+Codigo Java: 
+ public void eliminar(int posicion) {
+        if (posicion >= tam) {
+            throw new IndexOutOfBoundsException(
+                    "La posición " + posicion + " está fuera del tamaño de la lista (" + tam + ")"
+            );
+        }
+        if (posicion == 0) {
+            raiz = raiz.getSiguiente();
+            tam--;
+            return;
+        }
+        int count = 0;
+        Nodo<E> actual = raiz;
+        Nodo<E> anterior = null;
+        Nodo<E> siguiente = raiz.getSiguiente();
+        while (actual.getSiguiente() != null && count != posicion) {
+            count++;
+            anterior = actual;
+            actual = actual.getSiguiente();
+            siguiente = actual.getSiguiente();
+        }
+        anterior.setSiguiente(siguiente);
+        tam--;
+    }
+
+Pregunta 12
+Metodo unirCon.
+- public void unirCon(Lista<E> otraLista) {
+        if (otraLista.cabeza == null) {
+            return;  // Si la lista pasada es vacía, no hacemos nada
+        }
+        
+        if (cabeza == null) {
+            cabeza = otraLista.cabeza;  // Si la lista actual está vacía, la reemplazamos
+        } else {
+            Nodo<E> actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;  // Avanzamos al último nodo
+            }
+            actual.siguiente = otraLista.cabeza;  // Conectamos ambas listas
+        }
+    }
+
+Pregunta 13
+Iterator
+- El patrón Iterator es un patrón de diseño de comportamiento que permite recorrer una colección de elementos (como listas, conjuntos o árboles) sin exponer su representación interna. Proporciona una manera uniforme de acceder a los elementos de una colección uno por uno.
+
+Función Principal del Patrón Iterator:
+Acceso Secuencial: Permite recorrer elementos de una colección de manera secuencial sin importar su estructura interna.
+Encapsulamiento: Oculta la implementación interna de la colección, permitiendo acceso controlado.
+Simplificación del Código: Separa la lógica de iteración de la estructura de la colección.
+
+Codigo Java: 
+interface Iterador<E> {
+    boolean hasNext();  // ¿Hay más elementos?
+    E next();           // Devuelve el siguiente elemento
+}
+2. Clase ListaNumeros (Colección):
+java
+Copy code
+class ListaNumeros {
+    private int[] numeros;
+    private int indice;
+
+    // Constructor
+    public ListaNumeros(int tamaño) {
+        numeros = new int[tamaño];
+        indice = 0;
+    }
+
+    // Agregar un número a la lista
+    public void agregar(int numero) {
+        if (indice < numeros.length) {
+            numeros[indice++] = numero;
+        }
+    }
+
+    // Método para crear el iterador
+    public Iterador<Integer> crearIterador() {
+        return new Iterador<Integer>() {
+            private int posicion = 0;
+
+            @Override
+            public boolean hasNext() {
+                return posicion < indice;
+            }
+
+            @Override
+            public Integer next() {
+                return numeros[posicion++];
+            }
+        };
+    }
+}
+
+Utilizar el metodo agregar para usar
+  ListaNumeros lista = new ListaNumeros(5);
+
+        // Agregamos números a la lista
+        lista.agregar(10);
+        lista.agregar(20);
+        lista.agregar(30);
+        lista.agregar(40);
+        lista.agregar(50);
+
+while (iterador.hasNext()) {
+            System.out.println(iterador.next());
+        }
+
+Pregunta 14
+Explicar cómo podríamos implementar una ListaOrdenada a partir de una Lista. Escribir el código del método insertar para que tome en cuenta si los objetos implementan ordenamiento para poder colocarlo en la posición correcta y mantener la lista ordenada siempre.
+-Definir la Estructura de la Lista: Primero, tenemos una lista básica, como un ArrayList, que almacenará los elementos.
+
+Ordenar los Elementos: Cada vez que se inserte un nuevo elemento, el objetivo es encontrar la posición correcta donde debe ir el nuevo elemento para que la lista siga estando ordenada.
+
+Mantener el Orden al Agregar Elementos: Cada vez que agreguemos un elemento, insertamos ese elemento en su posición correcta dentro de la lista.
+
+Método de Inserción Ordenada:
+Insertar al Final: Si la lista está vacía, o si el nuevo elemento es mayor que todos los elementos existentes, lo insertamos al final.
+Insertar en el Medio: Si el nuevo elemento es menor que alguno de los elementos en la lista, lo insertamos en la posición correcta, manteniendo el orden.
+
+
+Codigo Java: 
+ protected Nodo<E> raiz;
+    protected Nodo<E> cola;
+    protected int tam = 0;
+
+    public void insertar(E valor) {
+        if (raiz == null) {
+            super.insertar(valor);
+            return;
+        }
+        if (!(valor instanceof Comparable<?>)) {
+            super.insertar(valor);
+            return;
+        }
+        // Si va antes de la raiz
+        Comparable<E> valorComparable = (Comparable<E>) valor;
+        Nodo<E> actual = raiz;
+        Nodo<E> nuevo = new Nodo(valor);
+        if (valorComparable.compareTo(actual.getValor()) <= 0) {
+            super.insertar(valor);
+            return;
+        }
+
+        // Si no buscamos el lugar correcto o llegamos al final
+        while(actual.getSiguiente() != null &&
+                valorComparable.compareTo(actual.getSiguiente().getValor()) > 0) {
+            actual = actual.getSiguiente();
+        }
+
+        // Esto si va justo despues de actual
+        Nodo<E> despuesDeActual = actual.getSiguiente();
+        // insertamos
+        actual.setSiguiente(nuevo);
+        nuevo.setAnterior(actual);
+        // actualizamos los enlaces de y hacia nuevo
+        nuevo.setSiguiente(despuesDeActual);
+        if (despuesDeActual != null)
+            despuesDeActual.setAnterior(nuevo);
+        else
+            cola = nuevo;
+
+           tam++; 
+   }
+
+Pregunta 15
+Se puede utilizar el concepto de árbol para implementar operaciones aritméticas. Indique cómo se puede hacer esto (diagrama de clases) y proponga el código del método para evaluar una expresión aritmética según el esquema propuesto.
+
+- Concepto de Árbol de Expresión
+Un árbol de expresión es un tipo de árbol binario donde:
+
+Las hojas son valores numéricos (operandos).
+Los nodos internos son operadores (como +, -, *, /).
+Las ramas conectan operadores con sus operandos, y la raíz representa la operación final que debe realizarse.
+
+public class Nodo {
+    String valor;
+    Nodo izquierda;
+    Nodo derecha;
+
+    // Constructor para nodos internos (con operadores)
+    public Nodo(String valor, Nodo izquierda, Nodo derecha) {
+        this.valor = valor;
+        this.izquierda = izquierda;
+        this.derecha = derecha;
+    }
+
+    // Constructor para nodos hoja (con operandos)
+    public Nodo(String valor) {
+        this.valor = valor;
+        this.izquierda = null;
+        this.derecha = null;
+    }
+}
+Evaluar el Árbol de Expresión:
+java
+Copy code
+public class Evaluador {
+    public static int evaluar(Nodo nodo) {
+        // Si el nodo es un número, devolver su valor como entero
+        if (nodo.izquierda == null && nodo.derecha == null) {
+            return Integer.parseInt(nodo.valor);
+        }
+
+        // Evaluar subárbol izquierdo y derecho
+        int izquierda = evaluar(nodo.izquierda);
+        int derecha = evaluar(nodo.derecha);
+
+        // Realizar la operación en el nodo actual
+        switch (nodo.valor) {
+            case "+":
+                return izquierda + derecha;
+            case "-":
+                return izquierda - derecha;
+            case "*":
+                return izquierda * derecha;
+            case "/":
+                return izquierda / derecha;
+            default:
+                throw new IllegalArgumentException("Operador no reconocido: " + nodo.valor);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Crear el árbol de expresión para (3 + 5) * 2
+        Nodo nodo3 = new Nodo("3");
+        Nodo nodo5 = new Nodo("5");
+        Nodo nodoSuma = new Nodo("+", nodo3, nodo5);
+        Nodo nodo2 = new Nodo("2");
+        Nodo nodoMultiplicacion = new Nodo("*", nodoSuma, nodo2);
+
+        // Evaluar la expresión
+        int resultado = evaluar(nodoMultiplicacion);
+        System.out.println("El resultado es: " + resultado);  // Salida: 16
+    }
+}
+
+
+Pregunta 16
+De la definición del patrón de diseño Singleton. Indique cuál es su función principal.
+- El patrón Singleton es un patrón de diseño creacional cuyo objetivo principal es garantizar que una clase tenga una única instancia y proporcione un punto de acceso global a esa instancia. Esto es útil cuando se necesita que una clase controle un recurso único o compartido, como una conexión a base de datos, una configuración global, o un administrador de logs.
+
+Función Principal del Patrón Singleton
+La función principal del Singleton es asegurar que solo exista una instancia de una clase durante toda la ejecución del programa y proporcionar un punto de acceso global a esa instancia. Esto permite controlar el acceso a recursos compartidos, evitando la creación de múltiples instancias innecesarias y manteniendo la consistencia.
+
+Pregunta 17
+De la definición del patrón de diseño DAO. Indique cuál es su función principal.
+Crear la Clase ListaAlumnos (Sujeto):
+- El patrón DAO es un patrón estructural que se utiliza para separar la lógica de acceso a datos de la lógica de negocio de una aplicación. Su objetivo principal es proporcionar una capa de abstracción entre la aplicación y la base de datos o cualquier fuente de datos, permitiendo que la lógica de negocio no dependa directamente de los detalles de implementación del almacenamiento.
+
+Función Principal del Patrón DAO
+La función principal del patrón DAO es gestionar el acceso a datos (como bases de datos, archivos, o cualquier otra fuente de almacenamiento) de manera centralizada y desacoplada. Al hacerlo, se logra:
+
+Abstracción de la fuente de datos: El patrón abstrae los detalles específicos de la implementación de almacenamiento (como consultas SQL o accesos a APIs).
+Desacoplamiento: Permite que la lógica de negocio se concentre en el procesamiento de datos y no en su almacenamiento o recuperación.
+Facilidad para realizar pruebas: Al abstraer el acceso a datos, se puede realizar pruebas unitarias sin depender de la base de datos real, utilizando "mocks" o "stubs".
+Codigo Java: public class Alumno {
+    private int id;
+    private String nombre;
+    private int edad;
+
+    public Alumno(int id, String nombre, int edad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // Métodos Getter y Setter
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{id=" + id + ", nombre='" + nombre + "', edad=" + edad + "}";
+    }
+
+
+

@@ -1,0 +1,186 @@
+Realizar los 10 practicos de manera entendible...
+Aplicar patrones de diseño.
+Git: Un servidor que actualiza los codigos.
+Aplicar Logs. Logger: Es  una herramienta utilizada para generar mensajes de registro (logs) que permiten a los desarrolladores monitorear la ejecución de aplicaciones, detectar problemas y depurar código. El registro es fundamental para el mantenimiento y la observabilidad de las aplicaciones en producción. 
+Log4j: Un framework de logging muy popular, parte de Apache.
+
+Dependencia: Se refiere a una relación en la que un componente, módulo, o clase de un programa depende de otro componente para funcionar correctamente. Es decir, si un componente requiere otro para realizar su tarea, se dice que el primero tiene una dependencia con el segundo.
+
+Instancia: objeto real y específico que ha sido creado usando una clase. Cuando creas una instancia de una clase, estás creando un objeto que tiene los atributos y métodos definidos en esa clase.
+
+Complejidad informatica: Cuanto tarda en ejecutarse el programa, lectura por linea de codigo, se necesita un algoritmo con complejidad baja para que se ejecute.
+1 operacion = 1 asignacion 
+ O(n) = n;
+Ghz = velocidad de ejecucion de cada operacion 2.5 Ghz = 2500000000 operaciones por segundo.
+Patron de diseño practico 1:  
+Martes 27 menu con los score de cada vez que se juega con el cuadrado, registrar el tiempo en milisegundos 
+MODELO-VISTA-CONTROLADOR
+Designes pat : observer, MVC
+
+inicializaciones en el contructor.
+Para que sirven los patrones de disenos?
+Para que sirve el Observer? Patron de diseno que permite notificar un cambio hacia toda la estructura del programa, asi el observable (El objeto propenso a cambios), es observado por el observador (Quien necesita se notificados de esos cambios)
+para que sirve el MVC?
+Para que hacemos el log? Para que sirve el Log es una herramienta utilizada para generar mensajes de registro (logs) que permiten a los desarrolladores monitorear la ejecución de aplicaciones, detectar problemas y depurar código. 
+Informar al interesado sobre los eventos, proceso o acciones que esta haciendo o hizo nuestro Código en la inmediacione del mensaje. Interesado puede ser:
+- El desarrollador (Nosotros mismos).
+- El usuario que esta ejecutando nuestro programa.
+- En cada mensaje hay un contexto suficiente, para poder ejercer un criterio, Ejemplo: 
+El Sr. Gonzales dio 5 bs en la limosnas (Es pobre): dio todo lo que pudo.
+El Sr. Gonzales dio 5 bs en la limosnas (Es rico): es avaro y duro.
+- Hay algo de interes que me permite sacar un criterio.
+
+Niveles del  mensaje: 1. debug, 2. info, 3. warning, 4. error.
+- EL archivo de configuracion para ver a quien le informa el mensaje y como, el debug es el debug y todo en adelante.
+Como se los implementa bien?
+Comunicar claramente lo que esta haciendo el codigo.
+En cada mensaje hay un contexto suficiente.
+Un programador que programa con Logs de manera regular, tarda 2 anos en escribir logs claros y con el contexto suficientes.
+
+
+Cuantas lineas de Log son correctas?
+5-8 de cada 100 lineas de codigo. Ejemplo: si en mi programa tengo 28 lineas de codigo una buena practica es tener 5 a 8 lineas de cada 100, entonces regla de 3: 5*28/100 = 1.4, deberia haber al menos 1 linea de Código.
+
+
+
+Observer with propertyChanger: PropertyChangeSupport supportObserver: Es un campo de la clase Empleado que manejará la lista de observadores interesados en los cambios de propiedad.
+
+addPropertyChangeListener(PropertyChangeListener listener): Añade un observador que quiere ser notificado de los cambios.
+
+removePropertyChangeListener(PropertyChangeListener listener): Elimina un observador de la lista.
+
+firePropertyChange(String propertyName, Object oldValue, Object newValue): Notifica a todos los observadores registrados que una propiedad ha cambiado, especificando el nombre de la propiedad, el valor anterior y el nuevo valor.
+
+
+En un programa es lo mas normal tener varios hilos de ejecucion, al mismo tiempo se esta ejecutando el codigo A, codigo B, Codigo C,
+
+
+Threads: 
+Los threads o multihilos son  seccion del codigo que se ejecuta de manera simultanea, independientemente de en que parte del codigo este.
+Threads sleep: Deja dormido el threads por 1000 milisegundos, permiten que un programa realice múltiples tareas de manera concurrente. El threads es (hilo) que ejecuta varias partes del codigo,
+
+
+Cuando le digo "Start" rompe el hilo y empieza la ejecucion 
+
+Ya sea que los datos del Threads se hagan en una clase aparte o en el mismo hilo, igual se ejecutan al mismo tiempo
+Aunque cambie los datos en la app el hilo se sigue ejecutando y es el observer el que cambia los datos.
+
+
+Quicksort: Elegir un pivote ies.  Respetar el criterio de elegir el mismo elemento de la lista para cada ciclo. Aceleramos el orden de un arreglo y se disminuye la complejidad.
+
+1:28 explica el practico;
+Nuevo: inicializa todo y empieza a correr el tiempo;
+
+Cosas esenciales: Log, Testeo
+
+
+
+
+                                                                                                                    PRACTICO 2
+
+Recursividad: metodo que se llama a si mismo, la misma function para resolver un ejercicio
+Test: Pueba para verificar, si cada cosa esta bien, hicimos el metodo, como lo testeo?. Ley de pareto
+Unit test: todos los test que realizamos para comprobar que todo esta bien.
+
+El trabjo del desarrollador consiste en saber desarrollar la idea sobre la cual va a trabajar tener clara la logica y sobre eso ir implementando metodos de manera progresiva es decir paso por paso, ir revisando si va funcionando las pequenas cosas que vas implementando 
+Practico 2: 
+Seleccionar un color dentro del JColorChooser y luego habilitar el color dentro del mouse para poder modificar los colores de los pixeles.
+
+														   PRACTICO 3
+Implementaciones: 
+1.- Herramienta para seleccionar si: Se dibuja un punto, se traza una linea, se dibuja un cuadrado.
+
+
+Patron de Diseno: La mejor forma de hacer algo, bases de codigos para implementar en un proyecto, optimizar procesos, optimizar tiempo.
+
+Patron observer: Observable ---notify---> observer
+Observable: Moneda extranjera, metodos: 
+-NotifyObservadores()
+-AddObservador(observador)
+-cambiarValor()
+Observer: Casa cambio, cambista, etc, metodos:
+-doAction(valorCambio) PRINCIPAL
+-
+ 
+
+Interfaces: Solo tiene definiciones de metodoos
+Clase: contiene toda las propiedades: atributo modelo metodos
+
+
+Patron command: permite encansular solicitudes como si fueran objetos, cada accion es un objeto, o cada metodo es un objeto.
+
+Command interface que se implementa con el metodo execute que se implementa en las clases que realicen las acciones 
+
+- Cliente
+- Invoker
+-Commad (Encapsula el detalle de la accion) 
+
+
+
+
+
+   						Para decir que realmente sabes programar, debes tener un dominio sólido en varias áreas clave de la programación. Aquí te detallo los puntos más importantes:
+1. Comprensión de Fundamentos de Programación:
+Variables, tipos de datos, estructuras de control (bucles, condicionales), funciones/métodos.
+Saber cómo construir algoritmos eficientes para resolver problemas.
+
+2. Programación Orientada a Objetos (POO):
+Entender conceptos clave como clases, objetos, herencia, polimorfismo, encapsulamiento y abstracción.
+Saber cuándo y cómo aplicarlos para crear código organizado y reutilizable.
+
+3. Estructuras de Datos y Algoritmos:
+Listas, pilas, colas, árboles, grafos, tablas hash, etc.
+Conocer algoritmos básicos (ordenamiento, búsqueda) y tener una comprensión de su complejidad en términos de Big O.
+
+4. Control de Versiones (Git):
+Saber usar Git para colaborar en proyectos, manejar versiones del código, resolver conflictos y gestionar ramas.
+
+5. Manejo de Errores y Depuración:
+Conocer cómo identificar y solucionar errores.
+Usar herramientas de depuración y tener un enfoque sistemático para corregir bugs.
+
+6. Patrones de Diseño:
+Entender algunos patrones de diseño comunes como Singleton, Factory, Strategy, Observer, entre otros.
+Saber cuándo y cómo aplicarlos.
+
+7. Buenas Prácticas:
+Escribir código limpio, legible y bien documentado.
+Aplicar principios SOLID, DRY (Don’t Repeat Yourself), y KISS (Keep It Simple, Stupid).
+
+8. Conocimientos de Bases de Datos:
+Saber cómo interactuar con bases de datos, tanto SQL como NoSQL.
+Conocer la normalización, índices, consultas optimizadas y transacciones.
+
+9. Experiencia Práctica.
+Haber trabajado en proyectos reales, ya sean personales, académicos o profesionales.
+Saber enfrentar problemas del mundo real y escribir código que funcione en producción.
+
+10. Testing:
+Conocer cómo escribir pruebas unitarias, de integración y funcionales.
+Usar herramientas de testing automatizado.
+
+11. Conocimientos de Frameworks y Herramientas:
+Dominar los frameworks y herramientas más usados en tu stack de desarrollo. En tu caso, como desarrollador backend en Java, sería importante manejar frameworks como Spring, Hibernate, etc.
+12. Capacidad para Aprender Nuevas Tecnologías:
+Saber adaptarse y aprender rápidamente nuevos lenguajes, frameworks y paradigmas de programación según sea necesario.
+Si tienes confianza en estas áreas y puedes aplicarlas para resolver problemas en situaciones diversas, puedes considerar que realmente sabes programar.
+ 5.- Estructura de datos, NODOS o LINKEDLIST: 
+Es una estructura de datos que se interrelaciona, repasar como es que se estructura y forman los nodos. Tiene un puntero y un contenido, es una lista enlazada, las listas enlazadas no tienen indice. La principal caracteristica de los nodos es el puntero.
+Array: Buenos para ubicar, pero malos para agregar o eliminar.
+LinkedList: Bueno para agregar o eliminar, pero malo para ubicar. 
+Metodos de aprendizaje:
+Practica activa: Manejar lo que estas aprendiendo de manera activa para verificar que manejas los conceptos.
+Enseñar lo que aprendes: Enseño lo que aprendo, trato de capacitarme de la mejor manera, saber como funciona esto, lo aplico. 
+Mapas mentales: Ver como se conectan los conceptos para ver como dominas los temas.
+Expreciones regulares: Analizar texto.													
+Arbol estructura de datos, en la que los nodos quedan como una jerarquia raiz-rama-hoja
+Grafos 
+
+
+
+
+
+
+
+
+
